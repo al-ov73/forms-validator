@@ -1,21 +1,23 @@
 from fastapi import Request, FastAPI
 
 from database import get_items
-from parser import parse_input_query
+from parser import get_template_name, parse_input_query
 
 
 app = FastAPI()
 
 
-@app.post("/")
+@app.post("/get_form")
 async def validate_form(request: Request):
     templates = get_items()
     print(templates)
     params = dict(request.query_params)
     parsed = parse_input_query(params)
-    print(parsed)
-    return parsed
+    template_name = get_template_name(templates, parsed)
+    return template_name if template_name else parsed
 
+
+# http://localhost:8000/get_form?user=value&ordered=2024-12-12
 
 # тестовое
 # https://docs.google.com/document/d/1fMFwPBs53xzcrltEFOpEG4GWTaQ-5jvVLrNT6_hmC7I/edit?tab=t.0

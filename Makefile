@@ -3,3 +3,6 @@ start:
 
 migrate:
 	poetry run python3 migrate.py
+
+test:
+	poetry run python3 test.py
