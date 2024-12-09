@@ -1,15 +1,21 @@
-from typing import Any
+from fastapi import Request, FastAPI
 
-from fastapi import Request, FastAPI, Form
-from tinydb import TinyDB, Query
+from database import get_items
+from parser import parse_input_query
+
 
 app = FastAPI()
-db = TinyDB('db.json')
+
 
 @app.post("/")
 async def validate_form(request: Request):
-    print(type(request.query_params))
-    return "Hello world"
+    templates = get_items()
+    print(templates)
+    params = dict(request.query_params)
+    parsed = parse_input_query(params)
+    print(parsed)
+    return parsed
+
 
 # тестовое
 # https://docs.google.com/document/d/1fMFwPBs53xzcrltEFOpEG4GWTaQ-5jvVLrNT6_hmC7I/edit?tab=t.0
@@ -28,7 +34,7 @@ async def validate_form(request: Request):
 # [{'count': 7, 'type': 'apple'}, {'count': 3, 'type': 'peach'}]
 #
 # >>> Fruit = Query()
-# >>> db.search(Fruit.type == 'peach')
+# >>> db.search(Fruit.type == 'peach')n
 # [{'count': 3, 'type': 'peach'}]
 # >>> db.search(Fruit.count > 5)
 # [{'count': 7, 'type': 'apple'}]
