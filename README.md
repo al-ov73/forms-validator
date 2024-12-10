@@ -49,7 +49,11 @@ make migrate
 ```
 make start
 ```
-Запустить тесты
+Запустить юнит-тесты
 ```
 make test
+```
+Запустить интеграционные тесты
+```
+python3 test_requests.py
 ```

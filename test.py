@@ -1,5 +1,5 @@
-from parser import get_template_name, parse_input_query, parse_param
-from validators import is_valid_date, is_valid_email, is_valid_phone_number
+from src.parser import get_template_name, parse_input_query, parse_param
+from src.validators import is_valid_date, is_valid_email, is_valid_phone_number
 
 
 def test_parse_param() -> None:

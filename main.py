@@ -1,7 +1,7 @@
 from fastapi import Request, FastAPI
 
-from database import get_items
-from parser import get_template_name, parse_input_query
+from src.database import get_items
+from src.parser import get_template_name, parse_input_query
 
 
 app = FastAPI()
