@@ -1,27 +1,55 @@
-# forms-validator
+### Web-приложение для определения заполненных форм
 
+На эндпоинт `/get_form` отправляется запрос вида 
 
+```
+http://localhost:8000/get_form?user=value&ordered=2024-12-12
+```
+Форма парсится и определяется ее соответствие какой-либо из форм в базе данных.<br>
 
-# http://localhost:8000/get_form?user=value&ordered=2024-12-12
+#### Примеры ответа
 
-# тестовое
-# https://docs.google.com/document/d/1fMFwPBs53xzcrltEFOpEG4GWTaQ-5jvVLrNT6_hmC7I/edit?tab=t.0
+Формат найден в базе данных
 
-# На вход по урлу /get_form POST запросом передаются данные такого вида:
-# f_name1=value1&f_name2=value2
+```
+{
+template_name:"Order"
+}
+```
 
+Формат не найден в базе данных
 
-# https://tinydb.readthedocs.io/en/latest/getting-started.html#basic-usage
-# >>> User = Query()
-# >>> db.insert({'name': 'John', 'age': 22})
-# >>> db.search(User.name == 'John')
-# [{'name': 'John', 'age': 22}]
-#
-# >>> db.all()
-# [{'count': 7, 'type': 'apple'}, {'count': 3, 'type': 'peach'}]
-#
-# >>> Fruit = Query()
-# >>> db.search(Fruit.type == 'peach')n
-# [{'count': 3, 'type': 'peach'}]
-# >>> db.search(Fruit.count > 5)
-# [{'count': 7, 'type': 'apple'}]
+```
+{
+ordered:"date"
+user:"text"
+}
+```
+
+---
+
+#### Запуск локально (с использованием менеджера зависимостей [Poetry](https://python-poetry.org/docs/))
+
+Клонировать репозиторий
+```
+git@github.com:al-ov73/forms-validator.git
+cd forms-validator
+```
+
+Установить зависимости
+```
+poetry install
+```
+Заполнить базу данных (в репозитории имеется уже заполненная db.json)
+```
+make migrate
+```
+
+Запустить проект
+```
+make start
+```
+Запустить тесты
+```
+make test
+```
