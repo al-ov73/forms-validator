@@ -2,7 +2,7 @@ from parser import get_template_name, parse_input_query, parse_param
 from validators import is_valid_date, is_valid_email, is_valid_phone_number
 
 
-def test_parse_param():
+def test_parse_param() -> None:
     assert parse_param("+7 123 456 78 90") == "phone"
     assert parse_param("2023-12-31") == "date"
     assert parse_param("31.12.2023") == "date"
@@ -11,7 +11,7 @@ def test_parse_param():
     print("test_parse_param passed")
 
 
-def test_parse_input_query():
+def test_parse_input_query() -> None:
     query = {
         "contact": "+7 123 456 78 90",
         "birth_date": "31.12.2023",
@@ -28,7 +28,7 @@ def test_parse_input_query():
     print("test_parse_input_query passed")
 
 
-def test_get_template_name():
+def test_get_template_name() -> None:
     templates = [
         {"name": "template1", "field1": "value1", "field2": "value2"},
         {"name": "template2", "field1": "value3", "field3": "value4"},
@@ -44,7 +44,7 @@ def test_get_template_name():
     print("test_get_template_name passed")
 
 
-def test_is_valid_phone_number():
+def test_is_valid_phone_number() -> None:
     assert is_valid_phone_number("+7 123 456 78 90") == True
     assert is_valid_phone_number("+7 123 4567 890") == False
     assert is_valid_phone_number("123 456 78 90") == False
@@ -52,7 +52,7 @@ def test_is_valid_phone_number():
     print("test_is_valid_phone_number passed")
 
 
-def test_is_valid_date():
+def test_is_valid_date() -> None:
     assert is_valid_date("31.12.2023") == True
     assert is_valid_date("2023-12-31") == True
     assert is_valid_date("31/12/2023") == False
@@ -60,7 +60,7 @@ def test_is_valid_date():
     print("test_is_valid_date passed")
 
 
-def test_is_valid_email():
+def test_is_valid_email() -> None:
     assert is_valid_email("test@example.com") == True
     assert is_valid_email("user.name+tag+sorting@example.com") == True
     assert is_valid_email("plainaddress") == False
